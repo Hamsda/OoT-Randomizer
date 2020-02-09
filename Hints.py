@@ -267,6 +267,8 @@ def get_hint_area(spot):
 
 def get_woth_hint(spoiler, world, checked):
     locations = spoiler.required_locations[world.id]
+    if world.hint_dist == "tournament" and not world.shuffle_song_items:
+        locations = list(filter(lambda location: not (location.type == 'Song'), locations))
     locations = list(filter(lambda location: 
         location.name not in checked and \
         not (world.woth_dungeon >= 2 and location.parent_region.dungeon), 
